@@ -1,0 +1,37 @@
+{
+  "name": "sx-indexdb-util",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A utility library for IndexedDB operations with promise-based API",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "indexeddb",
+    "database",
+    "storage",
+    "browser",
+    "util"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.9",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.52.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
