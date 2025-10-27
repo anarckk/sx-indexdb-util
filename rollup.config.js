@@ -1,8 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
+import dts from 'rollup-plugin-dts';
 
-export default {
+export default [{
   input: 'src/index.js',
   output: [
     {
@@ -23,4 +24,8 @@ export default {
     terser()
   ],
   external: []
-};
+}, {
+  input: 'src/index.d.ts',
+  output: [{ file: 'dist/index.d.ts', format: 'es' }],
+  plugins: [dts()]
+}];
