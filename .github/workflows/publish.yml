@@ -1,9 +1,20 @@
 name: Publish to npm
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
   workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Version type to release'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - 'major'
+          - 'minor'
+          - 'patch'
 
 jobs:
   publish:
@@ -11,6 +22,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -24,7 +38,28 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Publish to npm
-        run: npm publish
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Bump version and publish
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git pull
+          VERSION_TYPE=${{ github.event.inputs.version-type }}
+          npm version $VERSION_TYPE -m "Upgrade to %s"
+          npm publish
+          git push --follow-tags
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+      - name: Auto publish patch version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git pull
+          npm version patch -m "Upgrade to %s"
+          npm publish
+          git push --follow-tags
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
