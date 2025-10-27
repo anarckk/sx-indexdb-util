@@ -6,7 +6,7 @@
 let snowFlakeInstance = null;
 
 /**
- * 生成雪花ID
+ * 使用全局单例生成雪花ID
  * @returns {string} 雪花ID字符串
  */
 export function generateSnowflakeId() {
