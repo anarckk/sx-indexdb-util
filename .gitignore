@@ -4,3 +4,5 @@
 
 # Rollup构建输出目录
 /dist
+
+.idea
