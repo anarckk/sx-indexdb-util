@@ -16,7 +16,6 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -63,7 +62,7 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           git tag "v$VERSION"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git "v$VERSION"
+          git push origin "v$VERSION"
           echo "Created tag: v$VERSION"
 
       - name: Publish on version change
