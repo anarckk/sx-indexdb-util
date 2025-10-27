@@ -23,6 +23,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "sx-snow-flake-id": "^1.0.0"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.9",
     "@rollup/plugin-json": "^6.1.0",

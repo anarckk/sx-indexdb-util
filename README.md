@@ -7,8 +7,9 @@
 - 🚀 基于 Promise 的异步 API
 - 📦 支持 TypeScript 类型定义
 - 🔧 简洁的对象存储服务模式
-- ❄️ 集成雪花算法生成分布式唯一ID
+
 - 🔄 兼容旧版 API，平滑升级
+- ❄️ 集成雪花算法生成分布式唯一ID（需额外安装 sx-snow-flake-id 包）
 
 ## 安装
 
@@ -114,14 +115,22 @@ db.users.getService().then(userService => {
 - `$isKeyExists(id)` - 检查ID是否存在
 - `$saveOrUpdateRecord(record)` - 保存或更新记录
 
-### 雪花ID生成
+## 使用雪花ID生成器
+
+如需使用雪花ID生成功能，请额外安装 `sx-snow-flake-id` 包：
+
+```bash
+npm install sx-snow-flake-id
+```
+
+然后在代码中导入使用：
 
 ```javascript
-import { generateSnowflakeId } from 'sx-indexdb-util';
+import { generateSnowflakeId } from 'sx-snow-flake-id';
 
 // 生成唯一ID
 const id = generateSnowflakeId();
-console.log(id); // 输出: "1234567890123456789"
+console.log(id); // 输出类似: "1234567890123456789"
 ```
 
 ## 完整示例

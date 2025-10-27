@@ -4,7 +4,7 @@
  * 使用Snowflake算法生成分布式唯一ID
  */
 
-import { generateSnowflakeId } from './snow-flake-id.js';
+import { generateSnowflakeId } from 'sx-snow-flake-id';
 
 /**
  * 获取IndexedDB数据库实例
