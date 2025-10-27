@@ -1,6 +1,6 @@
 {
   "name": "sx-indexdb-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "description": "A utility library for IndexedDB operations with promise-based API",
   "main": "dist/index.js",

@@ -7,6 +7,11 @@ on:
     paths:
       - 'package.json'
 
+# 显式设置权限
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -16,6 +21,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -62,7 +68,8 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           git tag "v$VERSION"
-          git push origin "v$VERSION"
+          # 使用标准的 GitHub Actions token 格式
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git "v$VERSION"
           echo "Created tag: v$VERSION"
 
       - name: Publish on version change
